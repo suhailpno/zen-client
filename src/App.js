@@ -13,6 +13,9 @@ import Profile from './components/Profile';
 import ForgotPassword from './components/ForgotPassword';
 import ErrorBoundary from './components/ErrorBoundary';
 import MyBookings from './components/MyBookings';
+// import Home from './components/Home';
+
+
 
 function App() {
   return (
@@ -23,6 +26,7 @@ function App() {
             <Navbar />
             <div className="container mx-auto px-4 py-8">
               <Routes>
+                {/* <Route path="/" element={<Home />} /> */}
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/" element={<PrivateRoute><MovieSearch /></PrivateRoute>} />

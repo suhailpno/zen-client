@@ -22,24 +22,17 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError('');
     setLoading(true);
+    setError('');
 
     try {
-      const response = await axios.post('/api/auth/login', {
-        email: formData.email.trim(),
-        password: formData.password
-      });
-
-      if (response.data.success && response.data.token) {
-        login(response.data.token);
-        navigate('/');
-      } else {
-        setError('Invalid login response');
-      }
-    } catch (err) {
-      setError(err.response?.data?.message || 'Failed to login');
-      console.error('Login error:', err);
+      const response = await axios.post('/api/auth/login', formData);
+      // Assuming the response contains user data and a token
+      localStorage.setItem('token', response.data.token);
+      login(response.data.token, response.data.user);
+      navigate('/');
+    } catch (err) {   
+      setError('Login failed. Please try again.');
     } finally {
       setLoading(false);
     }
